@@ -1,0 +1,36 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightblue;
+  padding: 30px;
+  font-size: 32px;
+  max-height: 30px;
+}
+.rightSide {
+  display: flex;
+  align-items: center;
+}
+.addNewBtn {
+  padding: 10px;
+  border: none;
+  background-color: whitesmoke;
+  color: darkgrey;
+}
+.addNewBtn:hover {
+  color: lightblue;
+  border: 2px solid darkgrey;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: darkgray;
+  text-align: center;
+  padding: 10px;
+}
