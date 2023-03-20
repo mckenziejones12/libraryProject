@@ -2,7 +2,7 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
 }
-.header {
+#header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,21 +11,21 @@
   font-size: 32px;
   max-height: 30px;
 }
-.rightSide {
+#rightSide {
   display: flex;
   align-items: center;
 }
-.addNewBtn {
+#addNewBtn {
   padding: 10px;
   border: none;
   background-color: whitesmoke;
   color: darkgrey;
 }
-.addNewBtn:hover {
+#addNewBtn:hover {
   color: lightblue;
   border: 2px solid darkgrey;
 }
-.footer {
+#footer {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -33,4 +33,32 @@
   color: darkgray;
   text-align: center;
   padding: 10px;
+}
+#popUpForm {
+  margin-top: 50px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  background-color: lightblue;
+  color: black;
+  width: 350px;
+  padding: 20px;
+  gap: 20px;
+  border: 3px solid black;
+  border-radius: 10px;
+  font-weight: 600;
+  margin: auto;
+}
+#add {
+  grid-column: 1/3;
+  width: clamp(100px, 80%, 250px);
+  justify-self: center;
+  color: white;
+  background-color: darkgrey;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
 }
