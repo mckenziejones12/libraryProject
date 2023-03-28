@@ -45,6 +45,11 @@ function addBookToLibrary() {
 
 function displayLibraryBooks() {
   const display = document.getElementById("libraryContainer");
+  //remove all items in library container
+  while (display.firstChild) {
+    display.removeChild(display.firstChild);
+  }
+  //add new array of books to library content
   for (let i = 0; i < myLibrary.length; i++) {
     const currentBook = myLibrary[i];
     // create a div for each item
@@ -67,6 +72,8 @@ function displayLibraryBooks() {
     bookCard.appendChild(authorDiv);
     bookCard.appendChild(pagesDiv);
     bookCard.appendChild(readBtn);
+
+    //display new array of books
     console.log(currentBook);
   }
 }
