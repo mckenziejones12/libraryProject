@@ -39,6 +39,7 @@ function addBookToLibrary() {
   );
   myLibrary.push(newBook);
   formContainer.style.display = "none";
+  form.reset();
 
   displayLibraryBooks();
 }
