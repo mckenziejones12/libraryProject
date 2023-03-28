@@ -58,24 +58,27 @@ function displayLibraryBooks() {
     const authorDiv = document.createElement("p");
     const pagesDiv = document.createElement("p");
     const readBtn = document.createElement("button");
+    const removeBtn = document.createElement("button");
 
     // add text for each line item within div
     bookCard.classList.add("book");
+    bookCard.setAttribute("id", `book${i}`);
     titleDiv.textContent = `${currentBook.title}`;
     authorDiv.textContent = `${currentBook.author}`;
     pagesDiv.textContent = `${currentBook.pages} pages`;
     readBtn.setAttribute("id", `isRead${i}`);
     readBtn.textContent = "Read";
     readBtn.addEventListener("click", toggleRead);
+    removeBtn.textContent = "Remove Book";
+    removeBtn.setAttribute("id", `removeBtn${i}`);
+    removeBtn.addEventListener("click", removeSingleBook);
     // append div to container
     display.appendChild(bookCard);
     bookCard.appendChild(titleDiv);
     bookCard.appendChild(authorDiv);
     bookCard.appendChild(pagesDiv);
     bookCard.appendChild(readBtn);
-
-    //display new array of books
-    console.log(currentBook);
+    bookCard.appendChild(removeBtn);
   }
 }
 
@@ -88,6 +91,12 @@ function toggleRead(e) {
   } else if (didRead.textContent == "Not Read") {
     didRead.textContent = "Read";
   }
+}
+
+function removeSingleBook(e) {
+  const removeButton = document.getElementById(e.target.id);
+  const bookCardToRemove = removeButton.parentElement;
+  bookCardToRemove.remove();
 }
 
 // setup fake data
