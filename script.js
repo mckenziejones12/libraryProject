@@ -1,6 +1,6 @@
 let myLibrary = [];
 
-//grab elements and add event listeners
+// grab elements and add event listeners
 const addNewBookBtn = document.querySelector("#addNewBookBtn");
 addNewBookBtn.addEventListener("click", popUpForm);
 
@@ -12,7 +12,7 @@ const author = document.querySelector("author");
 const pages = document.querySelector("pages");
 const read = document.querySelector("read");
 
-//form displays when "+ New Book" is clicked
+// form displays when "+ New Book" is clicked
 function popUpForm() {
   const formContainer = document.getElementById("formContainer");
   formContainer.style.display = "block";
@@ -64,8 +64,9 @@ function displayLibraryBooks() {
     titleDiv.textContent = `${currentBook.title}`;
     authorDiv.textContent = `${currentBook.author}`;
     pagesDiv.textContent = `${currentBook.pages} pages`;
-    readBtn.setAttribute("id", "isRead");
+    readBtn.setAttribute("id", `isRead${i}`);
     readBtn.textContent = "Read";
+    readBtn.addEventListener("click", toggleRead);
     // append div to container
     display.appendChild(bookCard);
     bookCard.appendChild(titleDiv);
@@ -78,28 +79,39 @@ function displayLibraryBooks() {
   }
 }
 
+// toggle function for read vs. not read
+function toggleRead(e) {
+  console.log(e.target.id);
+  const didRead = document.getElementById(e.target.id);
+  if (didRead.textContent == "Read") {
+    didRead.textContent = "Not Read";
+  } else if (didRead.textContent == "Not Read") {
+    didRead.textContent = "Read";
+  }
+}
+
 // setup fake data
-// const books = [
-//   {
-//     title: "bob",
-//     author: "ross",
-//     pages: 206,
-//     checked: false,
-//   },
-//   {
-//     title: "bob",
-//     author: "dude",
-//     pages: 83,
-//     checked: false,
-//   },
-//   {
-//     title: "michael",
-//     author: "bob",
-//     pages: 10,
-//     checked: true,
-//   },
-// ];
+const books = [
+  {
+    title: "bob",
+    author: "ross",
+    pages: 206,
+    checked: false,
+  },
+  {
+    title: "bob",
+    author: "dude",
+    pages: 83,
+    checked: false,
+  },
+  {
+    title: "michael",
+    author: "bob",
+    pages: 10,
+    checked: true,
+  },
+];
 
-// myLibrary = books;
+myLibrary = books;
 
-// displayLibraryBooks();
+displayLibraryBooks();
