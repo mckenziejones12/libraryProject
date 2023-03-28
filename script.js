@@ -39,7 +39,13 @@ function addBookToLibrary() {
   );
   myLibrary.push(newBook);
   formContainer.style.display = "none";
+  // set form back to default values
   form.reset();
+
+  // current state here
+  // form is hidden
+  // form is reset to default values
+  // myLibrary has new book added
 
   displayLibraryBooks();
 }
@@ -53,6 +59,8 @@ function displayLibraryBooks() {
   //add new array of books to library content
   for (let i = 0; i < myLibrary.length; i++) {
     const currentBook = myLibrary[i];
+    currentBook.bookId = `book${i}`;
+
     // create a div for each item
     const bookCard = document.createElement("div");
     const titleDiv = document.createElement("h3");
@@ -67,11 +75,17 @@ function displayLibraryBooks() {
     titleDiv.textContent = `${currentBook.title}`;
     authorDiv.textContent = `${currentBook.author}`;
     pagesDiv.textContent = `${currentBook.pages} pages`;
-    readBtn.setAttribute("id", `isRead${i}`);
-    readBtn.textContent = "Read";
+    readBtn.setAttribute("id", `readBtnUnique${i}`);
+    readBtn.setAttribute(
+      "class",
+      `readBtn ${currentBook.read ? " isRead" : "notIsRead"}`
+    );
+    readBtn.textContent = currentBook.read ? "Read" : "Not Read";
+
     readBtn.addEventListener("click", toggleRead);
     removeBtn.textContent = "Remove Book";
     removeBtn.setAttribute("id", `removeBtn${i}`);
+    removeBtn.setAttribute("class", "removeBtn");
     removeBtn.addEventListener("click", removeSingleBook);
     // append div to container
     display.appendChild(bookCard);
@@ -83,45 +97,42 @@ function displayLibraryBooks() {
   }
 }
 
-// toggle function for read vs. not read
 function toggleRead(e) {
-  console.log(e.target.id);
+  const bookIdOfReadButtonClicked = e.target.parentElement.id;
+  const bookToUpdate = myLibrary.find(
+    (bookInLibrary) => bookInLibrary.bookId === bookIdOfReadButtonClicked
+  );
+
   const didRead = document.getElementById(e.target.id);
   if (didRead.textContent == "Read") {
     didRead.textContent = "Not Read";
+    didRead.classList = "readBtn notIsRead";
+    bookToUpdate.read = false;
   } else if (didRead.textContent == "Not Read") {
     didRead.textContent = "Read";
+    didRead.classList = "readBtn isRead";
+    bookToUpdate.read = true;
   }
 }
 
 function removeSingleBook(e) {
-  const removeButton = document.getElementById(e.target.id);
-  const bookCardToRemove = removeButton.parentElement;
-  bookCardToRemove.remove();
+  const removeButton = e.target;
+  const bookCardToRemoveId = removeButton.parentElement.id;
+
+  // Give me all books not equal to book I want to remove
+  // filter will give a copy of updated array, but NOT change original array
+  // so re-assign myLibrary
+  myLibrary = myLibrary.filter(
+    (bookInLibrary) => bookInLibrary.bookId !== bookCardToRemoveId
+  );
+
+  displayLibraryBooks();
 }
 
-// setup fake data
-const books = [
-  {
-    title: "bob",
-    author: "ross",
-    pages: 206,
-    checked: false,
-  },
-  {
-    title: "bob",
-    author: "dude",
-    pages: 83,
-    checked: false,
-  },
-  {
-    title: "michael",
-    author: "bob",
-    pages: 10,
-    checked: true,
-  },
+const sampleBooks = [
+  new Book("hunger games", "some author", 2, true),
+  new Book("harry potter", "another author", 3, false),
+  new Book("some title", "yet another", 4, false),
 ];
-
-myLibrary = books;
-
+myLibrary = sampleBooks;
 displayLibraryBooks();
